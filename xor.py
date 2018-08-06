@@ -7,7 +7,8 @@ def fixed_xor(str1, str2):
 		for i in range(len(str1)):
 			enc += bytes([str1[i] ^ str2[i]])
 		return enc
-	return None
+	else:
+		raise ValueError("Lengths " + str(len(str1)) + " and " + str(len(str2)) + " do not match.")
 
 def single_byte_xor(str1, b):
 	enc = b""

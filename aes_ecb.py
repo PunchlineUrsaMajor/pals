@@ -1,8 +1,10 @@
 from Crypto.Cipher import AES
 import base64
 import binascii
+import pad
 
 def enc_aes_ecb(text, key):
+	text = pad.pkcs7(text, len(key))
 	cipher = AES.new(key, AES.MODE_ECB)
 	return cipher.encrypt(text)
 

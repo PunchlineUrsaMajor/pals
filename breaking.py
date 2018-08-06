@@ -2,6 +2,7 @@ import strings
 import xor
 import binascii
 import base64
+import oracle
 
 def distance(str1, str2):
 	if len(str1) == len(str2):
@@ -53,7 +54,13 @@ def break_repeating_xor(text, min_len=10, max_len=40):
 		scores[keysize] = (strings.score_english(dec), key)
 	return max([(scores[i], i) for i in scores.keys()])
 
+def break_oracle():
+	text = bytes([0] * 48)
+	enc = oracle.encryption_oracle(text)
+	if len(enc) == 16:
+		return 'CBC'
+	else:
+		return 'ECB'
+
 if __name__ == '__main__':
-	with open('6.txt', 'r') as f:
-		data = base64.b64decode(f.read())
-		print(break_repeating_xor(data))
+	print(break_oracle())
